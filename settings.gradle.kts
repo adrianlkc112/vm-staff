@@ -22,3 +22,5 @@ dependencyResolutionManagement {
 rootProject.name = "Staff And Room"
 include(":app")
 include(":network")
+include(":people:feature")
+include(":people:data")
