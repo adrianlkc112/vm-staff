@@ -1,4 +1,4 @@
-package com.virginmoney.staff.ui.theme
+package com.virginmoney.ui.theming
 
 import androidx.compose.ui.graphics.Color
 

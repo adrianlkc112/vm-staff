@@ -42,6 +42,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":ui:theming"))
+
     implementation(platform(libs.androidx.compose.bom))
 
     implementation(libs.androidx.core.ktx)
