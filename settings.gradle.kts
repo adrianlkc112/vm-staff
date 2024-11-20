@@ -23,4 +23,5 @@ rootProject.name = "Staff And Room"
 include(":app")
 include(":network")
 include(":people:data")
+include(":ui:components")
 include(":ui:theming")
