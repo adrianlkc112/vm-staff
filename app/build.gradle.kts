@@ -42,8 +42,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":network"))
-    implementation(project(":people:data"))
+    implementation(project(":people:feature"))
     implementation(project(":ui:components"))
     implementation(project(":ui:theming"))
 

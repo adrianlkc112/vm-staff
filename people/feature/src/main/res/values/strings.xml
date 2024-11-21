@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title">Staff List</string>
+
+    <string name="avatar">Avatar</string>
+    <string name="email">Email</string>
+    <string name="favourite_color">Favourite Color</string>
+    <string name="first_name">First name</string>
+    <string name="job_title">Job Title</string>
+    <string name="last_name">Last name</string>
+
+    <string name="error_message">Something went wrong. Please try again later.</string>
+</resources>

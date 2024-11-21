@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.generated.people.destinations.PeopleScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.virginmoney.staff.R
 import com.virginmoney.staff.VmStaffNavGraph
@@ -27,6 +28,7 @@ internal fun HomeScreen(
 ) {
     HomeScreen(
         onPeopleClick = {
+            navigator.navigate(PeopleScreenDestination)
         },
         onRoomClick = {
         },
