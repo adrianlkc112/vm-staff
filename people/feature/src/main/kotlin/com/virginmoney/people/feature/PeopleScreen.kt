@@ -1,9 +1,13 @@
 package com.virginmoney.people.feature
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -40,6 +44,7 @@ internal fun PeopleScreen(
         uiState = uiState,
         onBackClick = {
             if (uiState !is LoadingPeopleUiState) {
+                navigator.popBackStack()
             }
         },
         onRoomClick = {
@@ -92,8 +97,33 @@ private fun LoadedPeopleContent(
     peoples: List<People>,
     modifier: Modifier = Modifier,
 ) {
+    Column(modifier = modifier.fillMaxSize()) {
+        TitlTable()
+        Spacer(Modifier.height(8.dp))
+        ContentTable(peoples)
+    }
+}
+
+@Composable
+private fun TitlTable() {
+    Row {
+        TableCell(
+            text = stringResource(R.string.first_name),
+            weight = 0.5f,
+            isTitle = true,
+        )
+        TableCell(
+            text = stringResource(R.string.last_name),
+            weight = 0.5f,
+            isTitle = true,
+        )
+    }
+}
+
+@Composable
+private fun ContentTable(peoples: List<People>) {
     LazyColumn(
-        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(peoples) { people ->
             Row {

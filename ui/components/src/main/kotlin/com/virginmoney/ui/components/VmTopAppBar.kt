@@ -31,7 +31,7 @@ fun VmTopAppBar(
         },
         navigationIcon = {
             if (onBackClick != null) {
-                IconButton(onClick = { }) {
+                IconButton(onClick = onBackClick) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = stringResource(R.string.back),
