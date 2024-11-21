@@ -1,7 +1,8 @@
-package com.virginmoney.staff
+package com.virginmoney.ui.components
 
 import android.content.res.Configuration
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -18,26 +19,42 @@ import com.virginmoney.ui.theming.VmTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun VmTopAppBar(
-    onStaffClick: () -> Unit = {},
-    onRoomClick: () -> Unit = {},
+fun VmTopAppBar(
+    title: String,
+    onBackClick: (() -> Unit)? = null,
+    onPeopleClick: (() -> Unit)? = null,
+    onRoomClick: (() -> Unit)? = null,
 ) {
     TopAppBar(
         title = {
-            Text(text = stringResource(R.string.app_name))
+            Text(title)
+        },
+        navigationIcon = {
+            if (onBackClick != null) {
+                IconButton(onClick = { }) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = stringResource(R.string.back),
+                    )
+                }
+            }
         },
         actions = {
-            IconButton(onClick = onStaffClick) {
-                Icon(
-                    imageVector = Icons.Filled.Person,
-                    contentDescription = stringResource(R.string.staff_details),
-                )
+            if (onPeopleClick != null) {
+                IconButton(onClick = onPeopleClick) {
+                    Icon(
+                        imageVector = Icons.Filled.Person,
+                        contentDescription = stringResource(R.string.staff_details),
+                    )
+                }
             }
-            IconButton(onClick = onRoomClick) {
-                Icon(
-                    imageVector = Icons.Filled.DateRange,
-                    contentDescription = stringResource(R.string.check_room),
-                )
+            if (onRoomClick != null) {
+                IconButton(onClick = onRoomClick) {
+                    Icon(
+                        imageVector = Icons.Filled.DateRange,
+                        contentDescription = stringResource(R.string.check_room),
+                    )
+                }
             }
         },
         colors =
@@ -60,7 +77,9 @@ internal fun VmTopAppBar(
 private fun VmTopAppBarPreview() {
     VmTheme {
         VmTopAppBar(
-            onStaffClick = {},
+            title = "Test",
+            onBackClick = {},
+            onPeopleClick = {},
             onRoomClick = {},
         )
     }
