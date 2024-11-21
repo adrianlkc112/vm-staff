@@ -13,8 +13,17 @@ internal class VmPeopleRepo
         override suspend fun getPeopleDetails(): Response<List<People>> =
             try {
                 val response = peopleService.getPeopleDetails()
-                Response.Success(response)
+                Response.Success(
+                    removeDuplicateAndSort(response),
+                )
             } catch (e: Exception) {
                 Response.Failure(e)
             }
+
+        private fun removeDuplicateAndSort(peoples: List<People>): List<People> =
+            peoples
+                .distinctBy { it.firstName + it.lastName + it.email }
+                .sortedWith(
+                    compareBy(People::firstName, People::lastName),
+                )
     }

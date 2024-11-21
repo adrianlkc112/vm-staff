@@ -31,12 +31,20 @@ class People(
                     favouriteColor = "Pink",
                 ),
                 People(
-                    firstName = "Jane",
+                    firstName = "June",
                     lastName = "Turner",
                     email = "jane.turner@example.com",
                     avatar = "https://example.com/avatar3.jpg",
                     jobTitle = "Principal Accounts Developer",
                     favouriteColor = "Green",
+                ),
+                People( // Duplicate data
+                    firstName = "John",
+                    lastName = "Doe",
+                    email = "john.doe@example.com",
+                    avatar = "https://example.com/avatar1.jpg",
+                    jobTitle = "Software Engineer",
+                    favouriteColor = "Blue",
                 ),
             )
     }

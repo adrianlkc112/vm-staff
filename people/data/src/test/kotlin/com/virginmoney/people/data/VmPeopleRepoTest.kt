@@ -10,7 +10,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
-class VmPeopleTest {
+class VmPeopleRepoTest {
     @MockK
     lateinit var peopleService: PeopleService
 
@@ -24,7 +24,7 @@ class VmPeopleTest {
     }
 
     @Test
-    fun `getPeopleDetails() - when api success - should return Success with People data`() {
+    fun `getPeopleDetails() - when api success - should return Success with non duplicate and sorted People data`() {
         coEvery {
             peopleService.getPeopleDetails()
         } returns People.createMocks()
@@ -43,6 +43,9 @@ class VmPeopleTest {
         assertEquals("https://example.com/avatar1.jpg", successResult.data[0].avatar)
         assertEquals("Software Engineer", successResult.data[0].jobTitle)
         assertEquals("Blue", successResult.data[0].favouriteColor)
+
+        assertEquals("June", successResult.data[1].firstName)
+        assertEquals("William", successResult.data[2].firstName)
     }
 
     @Test
