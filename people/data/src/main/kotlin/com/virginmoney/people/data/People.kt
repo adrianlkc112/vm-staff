@@ -8,7 +8,7 @@ class People(
     val lastName: String,
     val email: String,
     val avatar: String,
-    val jobTitle: String,
+    val jobTitle: String?,
     val favouriteColor: String,
 ) {
     companion object {

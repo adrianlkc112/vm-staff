@@ -26,6 +26,7 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.moshi)
+    ksp(libs.moshi.codegen)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.coroutines.test)
