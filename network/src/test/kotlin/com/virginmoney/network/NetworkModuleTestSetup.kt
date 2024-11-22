@@ -35,10 +35,7 @@ abstract class NetworkModuleTestSetup {
         val name: String,
     )
 
-    protected fun getMockWebServerHost(): String =
-        "${mockWebServer.url("")}"
-            .removePrefix("http://")
-            .removeSuffix("/")
+    protected fun getMockWebServerHost(): String = "${mockWebServer.url("")}"
 
     protected fun provideMoshiMock(): Moshi = NetworkModule.provideMoshi()
 }

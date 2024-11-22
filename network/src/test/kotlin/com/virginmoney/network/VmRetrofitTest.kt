@@ -15,7 +15,6 @@ class VmRetrofitTest : NetworkModuleTestSetup() {
         assertEquals("https://61e947967bc0550017bc61bf.mockapi.io/api/v1/", provideBaseUrl)
     }
 
-    // TODO: Fix fail unit test
     @Test
     fun `provideVmRetrofit() - should return correct instance`() {
         val successResponse = MockResponse().setBody("{\"name\":\"test\"}")
@@ -27,7 +26,7 @@ class VmRetrofitTest : NetworkModuleTestSetup() {
         }
 
         val request = mockWebServer.takeRequest()
-        assertEquals("https://${getMockWebServerHost()}/api/v1/test", request.requestUrl?.toString())
+        assertEquals("${getMockWebServerHost()}api/v1/test", request.requestUrl?.toString())
     }
 
     private fun provideVmRetrofit(): Retrofit =
@@ -37,6 +36,6 @@ class VmRetrofitTest : NetworkModuleTestSetup() {
                 NetworkModule.provideCommonOkHttpClient(
                     loggingInterceptor = NetworkModule.provideLoggingInterceptor(),
                 ),
-            baseUrl = "https://${getMockWebServerHost()}/api/v1/",
+            baseUrl = "${getMockWebServerHost()}api/v1/",
         )
 }
