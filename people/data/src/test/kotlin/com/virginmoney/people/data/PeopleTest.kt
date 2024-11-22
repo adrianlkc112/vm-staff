@@ -23,10 +23,19 @@ class PeopleTest {
         val first = result?.first()
         assertEquals("Maggie", first?.firstName)
         assertEquals("Brekke", first?.lastName)
+        assertEquals(1, first?.id)
         assertEquals("Crystel.Nicolas61@hotmail.com", first?.email)
         assertEquals("https://randomuser.me/api/portraits/women/21.jpg", first?.avatar)
         assertEquals("Future Functionality Strategist", first?.jobTitle)
         assertEquals("pink", first?.favouriteColor)
+
+        val createdAt = first?.createdAt
+        assertEquals(2022, createdAt?.year)
+        assertEquals(1, createdAt?.monthValue)
+        assertEquals(24, createdAt?.dayOfMonth)
+        assertEquals(17, createdAt?.hour)
+        assertEquals(2, createdAt?.minute)
+        assertEquals(23, createdAt?.second)
     }
 
     @Language("JSON")

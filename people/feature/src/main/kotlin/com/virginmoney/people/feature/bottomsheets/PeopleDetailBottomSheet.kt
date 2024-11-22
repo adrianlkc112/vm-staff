@@ -25,6 +25,7 @@ import com.virginmoney.people.feature.R
 import com.virginmoney.ui.components.TableCell
 import com.virginmoney.ui.components.VmBottomSheet
 import com.virginmoney.ui.theming.VmTheme
+import java.time.format.DateTimeFormatter
 
 @Destination<PeopleNavGraph>(style = DestinationStyleBottomSheet::class)
 @Composable
@@ -54,10 +55,15 @@ private fun PeopleDetailContent(people: People) {
 @Composable
 private fun PeopleDetailTable(people: People) {
     Column {
+        TableRow(stringResource(R.string.id), people.id.toString())
         TableRow(stringResource(R.string.first_name), people.firstName)
         TableRow(stringResource(R.string.last_name), people.lastName)
         TableRow(stringResource(R.string.job_title), people.jobTitle)
         TableRow(stringResource(R.string.email), people.email)
+        TableRow(
+            stringResource(R.string.created_at),
+            people.createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
+        )
         TableRow(stringResource(R.string.favourite_color), people.favouriteColor)
     }
 }

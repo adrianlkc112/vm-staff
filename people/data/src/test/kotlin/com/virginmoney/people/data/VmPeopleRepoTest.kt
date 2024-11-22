@@ -39,10 +39,19 @@ class VmPeopleRepoTest {
         assertEquals(3, successResult.data.size)
         assertEquals("John", successResult.data[0].firstName)
         assertEquals("Doe", successResult.data[0].lastName)
+        assertEquals(1, successResult.data[0].id)
         assertEquals("john.doe@example.com", successResult.data[0].email)
         assertEquals("https://example.com/avatar1.jpg", successResult.data[0].avatar)
         assertEquals("Software Engineer", successResult.data[0].jobTitle)
         assertEquals("Blue", successResult.data[0].favouriteColor)
+
+        val createdAt = successResult.data[0].createdAt
+        assertEquals(2022, createdAt.year)
+        assertEquals(1, createdAt.monthValue)
+        assertEquals(24, createdAt.dayOfMonth)
+        assertEquals(17, createdAt.hour)
+        assertEquals(2, createdAt.minute)
+        assertEquals(23, createdAt.second)
 
         assertEquals("June", successResult.data[1].firstName)
         assertEquals("William", successResult.data[2].firstName)
