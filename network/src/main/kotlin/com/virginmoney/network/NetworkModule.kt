@@ -1,6 +1,7 @@
 package com.virginmoney.network
 
 import com.squareup.moshi.Moshi
+import com.virginmoney.network.adapters.LocalDateTimeMoshiAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -77,6 +78,7 @@ internal interface NetworkModule {
         fun provideMoshi(): Moshi =
             Moshi
                 .Builder()
+                .add(LocalDateTimeMoshiAdapter())
                 .build()
     }
 }
