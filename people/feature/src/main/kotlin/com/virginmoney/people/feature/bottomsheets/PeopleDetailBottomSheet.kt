@@ -56,7 +56,7 @@ private fun PeopleDetailTable(people: People) {
     Column {
         TableRow(stringResource(R.string.first_name), people.firstName)
         TableRow(stringResource(R.string.last_name), people.lastName)
-        TableRow(stringResource(R.string.job_title), people.jobTitle ?: "")
+        TableRow(stringResource(R.string.job_title), people.jobTitle)
         TableRow(stringResource(R.string.email), people.email)
         TableRow(stringResource(R.string.favourite_color), people.favouriteColor)
     }

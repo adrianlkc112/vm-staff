@@ -1,6 +1,7 @@
 package com.virginmoney.people.data
 
 import android.os.Parcelable
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 
@@ -11,7 +12,8 @@ class People(
     val lastName: String,
     val email: String,
     val avatar: String,
-    val jobTitle: String?,
+    @Json(name = "jobtitle")
+    val jobTitle: String,
     val favouriteColor: String,
 ) : Parcelable {
     companion object {
