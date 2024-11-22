@@ -22,6 +22,7 @@ fun RowScope.TableCell(
     text: String,
     weight: Float,
     isTitle: Boolean = false,
+    modifier: Modifier = Modifier,
 ) {
     Text(
         text = text,
@@ -33,7 +34,7 @@ fun RowScope.TableCell(
             },
         fontWeight = if (isTitle) FontWeight.Bold else FontWeight.Normal,
         modifier =
-            Modifier
+            modifier
                 .border(
                     width = 1.dp,
                     color =

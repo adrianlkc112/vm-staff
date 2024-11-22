@@ -1,11 +1,14 @@
 package com.virginmoney.people.feature
 
 import android.content.res.Configuration
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,6 +17,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -24,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.generated.people.destinations.PeopleDetailBottomSheetDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.virginmoney.people.data.People
 import com.virginmoney.ui.components.TableCell
@@ -47,6 +52,13 @@ internal fun PeopleScreen(
                 navigator.popBackStack()
             }
         },
+        onContentClick = { people ->
+            navigator.navigate(
+                PeopleDetailBottomSheetDestination(
+                    people,
+                ),
+            )
+        },
         onRoomClick = {
         },
     )
@@ -56,6 +68,7 @@ internal fun PeopleScreen(
 private fun PeopleScreen(
     uiState: PeopleUiState,
     onBackClick: () -> Unit,
+    onContentClick: (People) -> Unit,
     onRoomClick: () -> Unit,
 ) {
     Scaffold(
@@ -73,6 +86,7 @@ private fun PeopleScreen(
             is LoadedPeopleUiState ->
                 LoadedPeopleContent(
                     uiState.peoples,
+                    onContentClick,
                     modifier = Modifier.padding(innerPadding),
                 )
             else -> ErrorPeopleContent()
@@ -95,12 +109,20 @@ private fun LoadingPeopleContent() {
 @Composable
 private fun LoadedPeopleContent(
     peoples: List<People>,
+    onContentClick: (People) -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier.fillMaxSize()) {
+    Column(
+        modifier =
+            modifier
+                .fillMaxSize()
+                .padding(8.dp),
+    ) {
+        Text(stringResource(R.string.click_to_details))
+        Spacer(Modifier.height(8.dp))
         TitlTable()
         Spacer(Modifier.height(8.dp))
-        ContentTable(peoples)
+        ContentTable(peoples, onContentClick)
     }
 }
 
@@ -121,19 +143,29 @@ private fun TitlTable() {
 }
 
 @Composable
-private fun ContentTable(peoples: List<People>) {
+private fun ContentTable(
+    peoples: List<People>,
+    onContentClick: (People) -> Unit = {},
+) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(peoples) { people ->
-            Row {
+            Row(
+                modifier =
+                    Modifier
+                        .height(intrinsicSize = IntrinsicSize.Max)
+                        .clickable { onContentClick(people) },
+            ) {
                 TableCell(
                     text = people.firstName,
                     weight = 0.5f,
+                    modifier = Modifier.fillMaxHeight(),
                 )
                 TableCell(
                     text = people.lastName,
                     weight = 0.5f,
+                    modifier = Modifier.fillMaxHeight(),
                 )
             }
         }
@@ -160,6 +192,7 @@ private fun LoadedPeopleScreenPreview() {
         PeopleScreen(
             uiState = LoadedPeopleUiState(People.createMocks()),
             onBackClick = {},
+            onContentClick = { _ -> },
             onRoomClick = {},
         )
     }
@@ -172,6 +205,7 @@ private fun LoadingPeopleScreenPreview() {
         PeopleScreen(
             uiState = LoadingPeopleUiState,
             onBackClick = {},
+            onContentClick = { _ -> },
             onRoomClick = {},
         )
     }
@@ -184,6 +218,7 @@ private fun ErrorPeopleScreenPreview() {
         PeopleScreen(
             uiState = ErrorPeopleUiState,
             onBackClick = {},
+            onContentClick = { _ -> },
             onRoomClick = {},
         )
     }

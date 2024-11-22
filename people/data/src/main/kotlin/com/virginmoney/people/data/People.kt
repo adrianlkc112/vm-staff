@@ -1,7 +1,10 @@
 package com.virginmoney.people.data
 
+import android.os.Parcelable
 import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @JsonClass(generateAdapter = true)
 class People(
     val firstName: String,
@@ -10,7 +13,7 @@ class People(
     val avatar: String,
     val jobTitle: String?,
     val favouriteColor: String,
-) {
+) : Parcelable {
     companion object {
         fun createMocks(): List<People> =
             listOf(

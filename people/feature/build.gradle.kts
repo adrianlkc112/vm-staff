@@ -38,11 +38,12 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.tooling)
     implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.compose.destinations.bottomSheet)
     implementation(libs.compose.destinations.core)
     ksp(libs.compose.destinations.ksp)
-    implementation(libs.compose.ui)
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
 
