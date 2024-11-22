@@ -1,14 +1,18 @@
 package com.virginmoney.people.feature.bottomsheets
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,14 +32,28 @@ internal fun PeopleDetailBottomSheet(people: People) {
     VmBottomSheet(
         title = "${people.firstName} ${people.lastName}",
         content = {
-            PeopleDetailTable(people)
+            PeopleDetailContent(people)
         },
     )
 }
 
 @Composable
+private fun PeopleDetailContent(people: People) {
+    Column(
+        modifier = Modifier.padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Box(Modifier.size(128.dp)) {
+            Avatar(people.avatar)
+        }
+        Spacer(Modifier.height(8.dp))
+        PeopleDetailTable(people)
+    }
+}
+
+@Composable
 private fun PeopleDetailTable(people: People) {
-    Column(Modifier.padding(8.dp)) {
+    Column {
         TableRow(stringResource(R.string.first_name), people.firstName)
         TableRow(stringResource(R.string.last_name), people.lastName)
         TableRow(stringResource(R.string.job_title), people.jobTitle ?: "")

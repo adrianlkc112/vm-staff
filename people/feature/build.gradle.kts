@@ -41,6 +41,7 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.tooling)
     implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.coil)
     implementation(libs.compose.destinations.bottomSheet)
     implementation(libs.compose.destinations.core)
     ksp(libs.compose.destinations.ksp)

@@ -1,6 +1,7 @@
 [versions]
 activityCompose = "1.9.3"
 agp = "8.7.2"
+coil = "2.7.0"
 composeBom = "2024.11.00"
 compose-destinations = "2.1.0-beta12"
 coreKtx = "1.13.1"
@@ -34,6 +35,7 @@ androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 compose-destinations-bottomSheet = { group = "io.github.raamcosta.compose-destinations", name = "bottom-sheet", version.ref = "compose-destinations" }
 compose-destinations-core = { group = "io.github.raamcosta.compose-destinations", name = "core", version.ref = "compose-destinations" }
 compose-destinations-ksp = { group = "io.github.raamcosta.compose-destinations", name = "ksp", version.ref = "compose-destinations" }
