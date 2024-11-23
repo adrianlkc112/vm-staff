@@ -15,12 +15,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -126,7 +128,7 @@ private fun TitlTable() {
             modifier = Modifier.fillMaxHeight(),
         )
         TableCell(
-            text = stringResource(R.string.occupied),
+            text = stringResource(R.string.available),
             weight = 0.35f,
             isTitle = true,
             modifier = Modifier.fillMaxHeight(),
@@ -159,9 +161,15 @@ private fun ContentTable(rooms: List<Room>) {
                 TableCell(
                     text =
                         if (room.isOccupied) {
-                            stringResource(R.string.yes)
+                            stringResource(R.string.available_no)
                         } else {
-                            stringResource(R.string.no)
+                            stringResource(R.string.available_yes)
+                        },
+                    customTextColor =
+                        if (room.isOccupied) {
+                            MaterialTheme.colorScheme.error
+                        } else {
+                            Color.Green
                         },
                     weight = 0.35f,
                     modifier = Modifier.fillMaxHeight(),

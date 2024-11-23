@@ -2,12 +2,11 @@
 <resources>
     <string name="room_title">Room List</string>
 
+    <string name="available">Available</string>">
+    <string name="available_no">No</string>">
+    <string name="available_yes">Yes</string>">
     <string name="id">ID</string>
-    <string name="occupied">Occupied</string>">
     <string name="max_occupancy">Max. Occupancy</string>">
-
-    <string name="yes">Yes</string>">
-    <string name="no">No</string>">
 
     <string name="error_message">Something went wrong. Please try again later.</string>
 </resources>
