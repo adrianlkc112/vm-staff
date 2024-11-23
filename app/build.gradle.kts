@@ -51,6 +51,7 @@ android {
 
 dependencies {
     implementation(project(":people:feature"))
+    implementation(project(":room:feature"))
     implementation(project(":ui:components"))
     implementation(project(":ui:theming"))
 
