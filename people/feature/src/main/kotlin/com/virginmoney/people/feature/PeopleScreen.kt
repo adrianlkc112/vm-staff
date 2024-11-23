@@ -75,7 +75,7 @@ private fun PeopleScreen(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             VmTopAppBar(
-                title = stringResource(R.string.title),
+                title = stringResource(R.string.people_title),
                 onBackClick = onBackClick,
                 onRoomClick = onRoomClick,
             )
@@ -128,16 +128,22 @@ private fun LoadedPeopleContent(
 
 @Composable
 private fun TitlTable() {
-    Row {
+    Row(
+        modifier =
+            Modifier
+                .height(intrinsicSize = IntrinsicSize.Max),
+    ) {
         TableCell(
             text = stringResource(R.string.first_name),
             weight = 0.5f,
             isTitle = true,
+            modifier = Modifier.fillMaxHeight(),
         )
         TableCell(
             text = stringResource(R.string.last_name),
             weight = 0.5f,
             isTitle = true,
+            modifier = Modifier.fillMaxHeight(),
         )
     }
 }
