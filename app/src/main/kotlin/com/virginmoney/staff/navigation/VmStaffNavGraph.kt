@@ -1,4 +1,4 @@
-package com.virginmoney.staff
+package com.virginmoney.staff.navigation
 
 import com.ramcosta.composedestinations.annotation.ExternalNavGraph
 import com.ramcosta.composedestinations.annotation.NavHostGraph

@@ -17,6 +17,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.plusAssign
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.generated.NavGraphs
+import com.ramcosta.composedestinations.generated.people.navgraphs.PeopleGraph
+import com.ramcosta.composedestinations.navigation.navGraph
+import com.virginmoney.people.feature.navigation.PeopleDependencies
+import com.virginmoney.staff.navigation.VmPeopleExternalNavigator
 import com.virginmoney.ui.theming.VmTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,6 +47,15 @@ class MainActivity : ComponentActivity() {
                     DestinationsNavHost(
                         navController = navController,
                         navGraph = NavGraphs.vmStaff,
+                        dependenciesContainerBuilder = {
+                            navGraph(PeopleGraph) {
+                                val externalNavigator =
+                                    remember(navBackStackEntry) {
+                                        VmPeopleExternalNavigator(navController)
+                                    }
+                                PeopleDependencies(externalNavigator)
+                            }
+                        },
                     )
                 }
             }

@@ -31,6 +31,8 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.generated.people.destinations.PeopleDetailBottomSheetDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.virginmoney.people.data.People
+import com.virginmoney.people.feature.navigation.PeopleExternalNavigator
+import com.virginmoney.people.feature.navigation.PeopleNavGraph
 import com.virginmoney.ui.components.TableCell
 import com.virginmoney.ui.components.VmTopAppBar
 import com.virginmoney.ui.theming.VmTheme
@@ -41,6 +43,7 @@ import com.virginmoney.ui.theming.VmTheme
 @Composable
 internal fun PeopleScreen(
     navigator: DestinationsNavigator,
+    externalNavigator: PeopleExternalNavigator,
     viewModel: PeopleViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -60,6 +63,7 @@ internal fun PeopleScreen(
             )
         },
         onRoomClick = {
+            externalNavigator.navigateToRoom()
         },
     )
 }

@@ -1,4 +1,4 @@
-package com.virginmoney.people.feature
+package com.virginmoney.people.feature.navigation
 
 import com.ramcosta.composedestinations.annotation.ExternalModuleGraph
 import com.ramcosta.composedestinations.annotation.NavGraph

@@ -17,7 +17,7 @@ import com.ramcosta.composedestinations.generated.people.destinations.PeopleScre
 import com.ramcosta.composedestinations.generated.room.destinations.RoomScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.virginmoney.staff.R
-import com.virginmoney.staff.VmStaffNavGraph
+import com.virginmoney.staff.navigation.VmStaffNavGraph
 import com.virginmoney.ui.components.VmTopAppBar
 import com.virginmoney.ui.theming.VmTheme
 

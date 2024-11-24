@@ -52,6 +52,7 @@ internal fun RoomScreen(
             }
         },
         onPeopleClick = {
+            //navigator.navigate()
         },
     )
 }

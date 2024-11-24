@@ -20,8 +20,8 @@ import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.bottomsheet.spec.DestinationStyleBottomSheet
 import com.virginmoney.people.data.People
-import com.virginmoney.people.feature.PeopleNavGraph
 import com.virginmoney.people.feature.R
+import com.virginmoney.people.feature.navigation.PeopleNavGraph
 import com.virginmoney.ui.components.TableCell
 import com.virginmoney.ui.components.VmBottomSheet
 import com.virginmoney.ui.theming.VmTheme
