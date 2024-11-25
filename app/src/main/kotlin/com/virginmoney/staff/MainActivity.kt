@@ -20,8 +20,10 @@ import com.ramcosta.composedestinations.generated.NavGraphs
 import com.ramcosta.composedestinations.generated.people.navgraphs.PeopleGraph
 import com.ramcosta.composedestinations.generated.room.navgraphs.RoomGraph
 import com.ramcosta.composedestinations.navigation.navGraph
+import com.ramcosta.composedestinations.utils.rememberDestinationsNavigator
 import com.virginmoney.people.feature.navigation.PeopleDependencies
 import com.virginmoney.room.feature.navigation.RoomDependencies
+import com.virginmoney.staff.navigation.VmNavHostAnimatedStyle
 import com.virginmoney.staff.navigation.VmPeopleExternalNavigator
 import com.virginmoney.staff.navigation.VmRoomExternalNavigator
 import com.virginmoney.ui.theming.VmTheme
@@ -42,6 +44,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val bottomSheetNavigator = remember { BottomSheetNavigator(sheetState) }
                 navController.navigatorProvider += bottomSheetNavigator
+                val destinationsNavigator = navController.rememberDestinationsNavigator()
                 ModalBottomSheetLayout(
                     bottomSheetNavigator = bottomSheetNavigator,
                     sheetShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
@@ -50,18 +53,19 @@ class MainActivity : ComponentActivity() {
                     DestinationsNavHost(
                         navController = navController,
                         navGraph = NavGraphs.vmStaff,
+                        defaultTransitions = VmNavHostAnimatedStyle(),
                         dependenciesContainerBuilder = {
                             navGraph(PeopleGraph) {
                                 val externalNavigator =
                                     remember(navBackStackEntry) {
-                                        VmPeopleExternalNavigator(navController)
+                                        VmPeopleExternalNavigator(destinationsNavigator)
                                     }
                                 PeopleDependencies(externalNavigator)
                             }
                             navGraph(RoomGraph) {
                                 val externalNavigator =
                                     remember(navBackStackEntry) {
-                                        VmRoomExternalNavigator(navController)
+                                        VmRoomExternalNavigator(destinationsNavigator)
                                     }
                                 RoomDependencies(externalNavigator)
                             }

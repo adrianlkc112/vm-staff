@@ -1,20 +1,12 @@
 package com.virginmoney.staff.navigation
 
-import androidx.navigation.NavHostController
-import androidx.navigation.NavOptions
-import com.ramcosta.composedestinations.generated.destinations.HomeScreenDestination
-import com.ramcosta.composedestinations.generated.people.destinations.PeopleScreenDestination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.virginmoney.room.feature.navigation.RoomExternalNavigator
 
 class VmRoomExternalNavigator(
-    private val navController: NavHostController,
+    private val navigator: DestinationsNavigator,
 ) : RoomExternalNavigator {
     override fun navigateToPeople() {
-        val navOptions =
-            NavOptions
-                .Builder()
-                .setPopUpTo(HomeScreenDestination.route, false)
-                .build()
-        navController.navigate(PeopleScreenDestination.route, navOptions)
+        VmNavigator.navigateToPeople(navigator)
     }
 }

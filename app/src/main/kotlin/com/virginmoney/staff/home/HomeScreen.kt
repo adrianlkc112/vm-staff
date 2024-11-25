@@ -13,10 +13,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.generated.people.destinations.PeopleScreenDestination
-import com.ramcosta.composedestinations.generated.room.destinations.RoomScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.virginmoney.staff.R
+import com.virginmoney.staff.navigation.VmNavigator
 import com.virginmoney.staff.navigation.VmStaffNavGraph
 import com.virginmoney.ui.components.VmTopAppBar
 import com.virginmoney.ui.theming.VmTheme
@@ -29,10 +28,10 @@ internal fun HomeScreen(
 ) {
     HomeScreen(
         onPeopleClick = {
-            navigator.navigate(PeopleScreenDestination)
+            VmNavigator.navigateToPeople(navigator)
         },
         onRoomClick = {
-            navigator.navigate(RoomScreenDestination)
+            VmNavigator.navigateToRoom(navigator)
         },
     )
 }
@@ -53,15 +52,15 @@ private fun HomeScreen(
         },
     ) { innerPadding ->
         Greeting(
-            modifer = Modifier.padding(innerPadding),
+            modifier = Modifier.padding(innerPadding),
         )
     }
 }
 
 @Composable
-private fun Greeting(modifer: Modifier = Modifier) {
+private fun Greeting(modifier: Modifier = Modifier) {
     Box(
-        modifier = modifer.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
     ) {
         Text("Welcome!")
