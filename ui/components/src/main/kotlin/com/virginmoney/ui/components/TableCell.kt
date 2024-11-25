@@ -1,6 +1,5 @@
 package com.virginmoney.ui.components
 
-import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
@@ -15,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.virginmoney.ui.theming.VmTheme
 
@@ -28,12 +28,13 @@ fun RowScope.TableCell(
 ) {
     Text(
         text = text,
-        color = customTextColor
-            ?: if (isTitle) {
-                MaterialTheme.colorScheme.onPrimary
-            } else {
-                MaterialTheme.colorScheme.onSurface
-            },
+        color =
+            customTextColor
+                ?: if (isTitle) {
+                    MaterialTheme.colorScheme.onPrimary
+                } else {
+                    MaterialTheme.colorScheme.onSurface
+                },
         fontWeight = if (isTitle) FontWeight.Bold else FontWeight.Normal,
         modifier =
             modifier
@@ -56,14 +57,7 @@ fun RowScope.TableCell(
     )
 }
 
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    name = "DarkTableCellDefaultPreview",
-)
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_NO,
-    name = "LightTableCellDefaultPreview",
-)
+@PreviewLightDark
 @Composable
 private fun TableCellDefaultPreview() {
     VmTheme {
@@ -83,14 +77,7 @@ private fun TableCellDefaultPreview() {
     }
 }
 
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    name = "DarkTableCellTitlePreview",
-)
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_NO,
-    name = "LightTableCellTitlePreview",
-)
+@PreviewLightDark
 @Composable
 private fun TableCellTitlePreview() {
     VmTheme {
@@ -118,9 +105,9 @@ private fun TableCellWithCustomTextColorPreview() {
         Surface {
             Row(
                 modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
             ) {
                 TableCell(
                     text = "Test",

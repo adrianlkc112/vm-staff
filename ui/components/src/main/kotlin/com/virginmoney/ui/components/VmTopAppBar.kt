@@ -1,6 +1,5 @@
 package com.virginmoney.ui.components
 
-import android.content.res.Configuration
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.DateRange
@@ -14,7 +13,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.virginmoney.ui.theming.VmTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -65,14 +64,7 @@ fun VmTopAppBar(
     )
 }
 
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    name = "DarkVmTopAppBarPreview",
-)
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_NO,
-    name = "LightVmTopAppBarPreview",
-)
+@PreviewLightDark
 @Composable
 private fun VmTopAppBarPreview() {
     VmTheme {

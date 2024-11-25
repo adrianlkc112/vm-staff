@@ -1,6 +1,5 @@
 package com.virginmoney.ui.components
 
-import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,7 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.virginmoney.ui.theming.VmTheme
 
@@ -100,14 +99,7 @@ private fun BottomSheetHeader(title: String) {
     }
 }
 
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    name = "DarkVmBottomSheetPreview",
-)
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_NO,
-    name = "LightVmBottomSheetPreview",
-)
+@PreviewLightDark
 @Composable
 private fun VmBottomSheetPreview() {
     VmTheme {
