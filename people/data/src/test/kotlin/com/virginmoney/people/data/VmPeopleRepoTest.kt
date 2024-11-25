@@ -72,4 +72,34 @@ class VmPeopleRepoTest {
         val failureResult = result as Response.Failure
         assertEquals("Test", failureResult.exception.message)
     }
+
+    @Test
+    fun `getPeopleDetails() - when api 1st success 2nd fail - on 2nd should return Success by using cached data`() {
+        coEvery {
+            peopleService.getPeopleDetails()
+        } returns People.createMocks()
+
+        val firstResult =
+            runBlocking {
+                vmPeopleRepo.getPeopleDetails()
+            }
+
+        assertTrue(firstResult is Response.Success)
+
+        coEvery {
+            peopleService.getPeopleDetails()
+        } throws Exception("Test")
+
+        val secondResult =
+            runBlocking {
+                vmPeopleRepo.getPeopleDetails()
+            }
+
+        assertTrue(secondResult is Response.Success)
+        val successResult = secondResult as Response.Success
+        assertEquals(3, successResult.data.size)
+        assertEquals("John", successResult.data[0].firstName)
+        assertEquals("June", successResult.data[1].firstName)
+        assertEquals("William", successResult.data[2].firstName)
+    }
 }

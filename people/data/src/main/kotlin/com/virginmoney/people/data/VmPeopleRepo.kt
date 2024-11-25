@@ -10,15 +10,20 @@ internal class VmPeopleRepo
     constructor(
         private val peopleService: PeopleService,
     ) : PeopleRepo {
-        override suspend fun getPeopleDetails(): Response<List<People>> =
-            try {
-                val response = peopleService.getPeopleDetails()
-                Response.Success(
-                    removeDuplicateAndSort(response),
-                )
+        private var cachedPeoples: List<People>? = null
+
+        override suspend fun getPeopleDetails(): Response<List<People>> {
+            return try {
+                val cache = cachedPeoples
+                if (cache != null) return Response.Success(cache)
+
+                val response = removeDuplicateAndSort(peopleService.getPeopleDetails())
+                cachedPeoples = response
+                Response.Success(response)
             } catch (e: Exception) {
                 Response.Failure(e)
             }
+        }
 
         private fun removeDuplicateAndSort(peoples: List<People>): List<People> =
             peoples
