@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="people_title">Staff List</string>
+    <string name="people_title">Staff Details</string>
     <string name="click_to_details">Click item to view details</string>
 
     <string name="avatar">Avatar</string>

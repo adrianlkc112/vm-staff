@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="room_title">Room List</string>
+    <string name="room_title">Check Rooms</string>
 
     <string name="available">Available</string>">
     <string name="available_no">No</string>">
