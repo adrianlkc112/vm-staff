@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,7 +56,9 @@ private fun PeopleDetailContent(people: People) {
 
 @Composable
 private fun PeopleDetailTable(people: People) {
-    Column {
+    Column(
+        modifier = Modifier.verticalScroll(rememberScrollState()),
+    ) {
         TableRow(stringResource(R.string.id), people.id.toString())
         TableRow(stringResource(R.string.first_name), people.firstName)
         TableRow(stringResource(R.string.last_name), people.lastName)
