@@ -7,6 +7,4 @@
     <string name="available_yes">Yes</string>">
     <string name="id">ID</string>
     <string name="max_occupancy">Max. Occupancy</string>">
-
-    <string name="error_message">Something went wrong. Please try again later.</string>
 </resources>

@@ -33,6 +33,7 @@ import com.virginmoney.room.data.Room
 import com.virginmoney.room.feature.navigation.RoomExternalNavigator
 import com.virginmoney.room.feature.navigation.RoomNavGraph
 import com.virginmoney.ui.components.TableCell
+import com.virginmoney.ui.components.VmAlertDialog
 import com.virginmoney.ui.components.VmTopAppBar
 import com.virginmoney.ui.theming.VmTheme
 
@@ -57,14 +58,18 @@ internal fun RoomScreen(
         onPeopleClick = {
             externalNavigator.navigateToPeople()
         },
+        onTryAgain = {
+            viewModel.getRooms(true)
+        },
     )
 }
 
 @Composable
 private fun RoomScreen(
     uiState: RoomUiState,
-    onBackClick: () -> Unit,
-    onPeopleClick: () -> Unit,
+    onBackClick: () -> Unit = {},
+    onPeopleClick: () -> Unit = {},
+    onTryAgain: () -> Unit = {},
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -84,7 +89,10 @@ private fun RoomScreen(
                     modifier = Modifier.padding(innerPadding),
                 )
 
-            else -> ErrorRoomContent()
+            else -> ErrorRoomContent(
+                onTryAgain = onTryAgain,
+                onDismiss = onBackClick,
+            )
         }
     }
 }
@@ -189,8 +197,16 @@ private fun ContentTable(rooms: List<Room>) {
 }
 
 @Composable
-private fun ErrorRoomContent() {
-    // TODO: Add error screen & handling
+private fun ErrorRoomContent(
+    onDismiss: () -> Unit,
+    onTryAgain: () -> Unit,
+) {
+    Box(Modifier.fillMaxSize()) {
+        VmAlertDialog(
+            onConfirmation = onTryAgain,
+            onDismissRequest = onDismiss,
+        )
+    }
 }
 
 @Preview(
@@ -201,14 +217,11 @@ private fun ErrorRoomContent() {
     uiMode = Configuration.UI_MODE_NIGHT_NO,
     name = "LightLoadedRoomScreenPreview",
 )
-@Preview
 @Composable
 private fun LoadedRoomScreenPreview() {
     VmTheme {
         RoomScreen(
             uiState = LoadedRoomUiState(Room.createMocks()),
-            onBackClick = {},
-            onPeopleClick = {},
         )
     }
 }
@@ -219,8 +232,6 @@ private fun LoadingRoomScreenPreview() {
     VmTheme {
         RoomScreen(
             uiState = LoadingRoomUiState,
-            onBackClick = {},
-            onPeopleClick = {},
         )
     }
 }
@@ -231,8 +242,6 @@ private fun ErrorRoomScreenPreview() {
     VmTheme {
         RoomScreen(
             uiState = ErrorRoomUiState,
-            onBackClick = {},
-            onPeopleClick = {},
         )
     }
 }
