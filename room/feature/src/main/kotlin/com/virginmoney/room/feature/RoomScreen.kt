@@ -30,6 +30,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.virginmoney.room.data.Room
+import com.virginmoney.room.feature.navigation.RoomExternalNavigator
+import com.virginmoney.room.feature.navigation.RoomNavGraph
 import com.virginmoney.ui.components.TableCell
 import com.virginmoney.ui.components.VmTopAppBar
 import com.virginmoney.ui.theming.VmTheme
@@ -40,6 +42,7 @@ import com.virginmoney.ui.theming.VmTheme
 @Composable
 internal fun RoomScreen(
     navigator: DestinationsNavigator,
+    externalNavigator: RoomExternalNavigator,
     viewModel: RoomViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -52,7 +55,7 @@ internal fun RoomScreen(
             }
         },
         onPeopleClick = {
-            //navigator.navigate()
+            externalNavigator.navigateToPeople()
         },
     )
 }
@@ -69,7 +72,7 @@ private fun RoomScreen(
             VmTopAppBar(
                 title = stringResource(R.string.room_title),
                 onBackClick = onBackClick,
-                onRoomClick = onPeopleClick,
+                onPeopleClick = onPeopleClick,
             )
         },
     ) { innerPadding ->

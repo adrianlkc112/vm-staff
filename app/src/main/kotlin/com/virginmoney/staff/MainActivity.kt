@@ -18,9 +18,12 @@ import androidx.navigation.plusAssign
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.generated.NavGraphs
 import com.ramcosta.composedestinations.generated.people.navgraphs.PeopleGraph
+import com.ramcosta.composedestinations.generated.room.navgraphs.RoomGraph
 import com.ramcosta.composedestinations.navigation.navGraph
 import com.virginmoney.people.feature.navigation.PeopleDependencies
+import com.virginmoney.room.feature.navigation.RoomDependencies
 import com.virginmoney.staff.navigation.VmPeopleExternalNavigator
+import com.virginmoney.staff.navigation.VmRoomExternalNavigator
 import com.virginmoney.ui.theming.VmTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,6 +57,13 @@ class MainActivity : ComponentActivity() {
                                         VmPeopleExternalNavigator(navController)
                                     }
                                 PeopleDependencies(externalNavigator)
+                            }
+                            navGraph(RoomGraph) {
+                                val externalNavigator =
+                                    remember(navBackStackEntry) {
+                                        VmRoomExternalNavigator(navController)
+                                    }
+                                RoomDependencies(externalNavigator)
                             }
                         },
                     )
