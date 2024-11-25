@@ -14,13 +14,13 @@ class VmRoomRepoTest {
     @MockK
     lateinit var roomService: RoomService
 
-    private lateinit var vmPeopleRepo: VmRoomRepo
+    private lateinit var vmRoomRepo: VmRoomRepo
 
     @Before
     fun setup() {
         MockKAnnotations.init(this)
 
-        vmPeopleRepo = VmRoomRepo(roomService)
+        vmRoomRepo = VmRoomRepo(roomService)
     }
 
     @Test
@@ -31,11 +31,12 @@ class VmRoomRepoTest {
 
         val result =
             runBlocking {
-                vmPeopleRepo.getRooms()
+                vmRoomRepo.getRooms()
             }
 
         assertTrue(result is Response.Success)
         val successResult = result as Response.Success
+        assertEquals(3, successResult.data.size)
         assertEquals(1, successResult.data[0].id)
         assertEquals(false, successResult.data[0].isOccupied)
         assertEquals(84245L, successResult.data[0].maxOccupancy)
@@ -52,11 +53,41 @@ class VmRoomRepoTest {
 
         val result =
             runBlocking {
-                vmPeopleRepo.getRooms()
+                vmRoomRepo.getRooms()
             }
 
         assertTrue(result is Response.Failure)
         val failureResult = result as Response.Failure
         assertEquals("Test", failureResult.exception.message)
+    }
+
+    @Test
+    fun `getRooms() - when api 1st success 2nd fail - on 2nd should return Success by using cached data`() {
+        coEvery {
+            roomService.getRooms()
+        } returns Room.createMocks()
+
+        val firstResult =
+            runBlocking {
+                vmRoomRepo.getRooms()
+            }
+
+        assertTrue(firstResult is Response.Success)
+
+        coEvery {
+            roomService.getRooms()
+        } throws Exception("Test")
+
+        val secondResult =
+            runBlocking {
+                vmRoomRepo.getRooms()
+            }
+
+        assertTrue(secondResult is Response.Success)
+        val successResult = secondResult as Response.Success
+        assertEquals(3, successResult.data.size)
+        assertEquals(1, successResult.data[0].id)
+        assertEquals(2, successResult.data[1].id)
+        assertEquals(3, successResult.data[2].id)
     }
 }

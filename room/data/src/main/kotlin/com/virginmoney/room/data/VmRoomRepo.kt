@@ -10,15 +10,20 @@ internal class VmRoomRepo
     constructor(
         private val roomService: RoomService,
     ) : RoomRepo {
-        override suspend fun getRooms(): Response<List<Room>> =
-            try {
-                val response = roomService.getRooms()
-                Response.Success(
-                    sort(response),
-                )
+        private var cachedRooms: List<Room>? = null
+
+        override suspend fun getRooms(): Response<List<Room>> {
+            return try {
+                val cache = cachedRooms
+                if (cache != null) return Response.Success(cache)
+
+                val response = sort(roomService.getRooms())
+                cachedRooms = response
+                Response.Success(response)
             } catch (e: Exception) {
                 Response.Failure(e)
             }
+        }
 
         private fun sort(rooms: List<Room>): List<Room> =
             rooms.sortedBy { room ->
