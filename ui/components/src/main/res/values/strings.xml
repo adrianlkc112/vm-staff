@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="back">Back</string>
-    <string name="check_room">Check Room</string>
+    <string name="check_rooms">Check Rooms</string>
     <string name="staff_details">Staff Details</string>
 
     <string name="try_again_title">Sorry</string>

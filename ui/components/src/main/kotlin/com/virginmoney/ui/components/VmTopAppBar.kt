@@ -51,7 +51,7 @@ fun VmTopAppBar(
                 IconButton(onClick = onRoomClick) {
                     Icon(
                         imageVector = Icons.Filled.DateRange,
-                        contentDescription = stringResource(R.string.check_room),
+                        contentDescription = stringResource(R.string.check_rooms),
                     )
                 }
             }

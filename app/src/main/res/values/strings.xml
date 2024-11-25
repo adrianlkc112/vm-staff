@@ -2,5 +2,5 @@
     <string name="app_name">Staff and Room</string>
 
     <string name="staff_details">Staff Details</string>
-    <string name="check_room">Check Room</string>
+    <string name="check_rooms">Check Rooms</string>
 </resources>
