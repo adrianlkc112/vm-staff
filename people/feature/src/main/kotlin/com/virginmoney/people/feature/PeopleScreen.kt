@@ -34,6 +34,7 @@ import com.virginmoney.people.data.People
 import com.virginmoney.people.feature.navigation.PeopleExternalNavigator
 import com.virginmoney.people.feature.navigation.PeopleNavGraph
 import com.virginmoney.ui.components.TableCell
+import com.virginmoney.ui.components.VmAlertDialog
 import com.virginmoney.ui.components.VmTopAppBar
 import com.virginmoney.ui.theming.VmTheme
 
@@ -65,15 +66,19 @@ internal fun PeopleScreen(
         onRoomClick = {
             externalNavigator.navigateToRoom()
         },
+        onTryAgain = {
+            viewModel.getPeopleDetails(true)
+        },
     )
 }
 
 @Composable
 private fun PeopleScreen(
     uiState: PeopleUiState,
-    onBackClick: () -> Unit,
-    onContentClick: (People) -> Unit,
-    onRoomClick: () -> Unit,
+    onBackClick: () -> Unit = {},
+    onContentClick: (People) -> Unit = { _ -> },
+    onRoomClick: () -> Unit = {},
+    onTryAgain: () -> Unit = {},
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -93,7 +98,11 @@ private fun PeopleScreen(
                     onContentClick,
                     modifier = Modifier.padding(innerPadding),
                 )
-            else -> ErrorPeopleContent()
+            else ->
+                ErrorPeopleContent(
+                    onTryAgain = onTryAgain,
+                    onDismiss = onBackClick,
+                )
         }
     }
 }
@@ -183,8 +192,16 @@ private fun ContentTable(
 }
 
 @Composable
-private fun ErrorPeopleContent() {
-    // TODO: Add error screen & handling
+private fun ErrorPeopleContent(
+    onDismiss: () -> Unit,
+    onTryAgain: () -> Unit,
+) {
+    Box(Modifier.fillMaxSize()) {
+        VmAlertDialog(
+            onConfirmation = onTryAgain,
+            onDismissRequest = onDismiss,
+        )
+    }
 }
 
 @Preview(
@@ -195,15 +212,11 @@ private fun ErrorPeopleContent() {
     uiMode = Configuration.UI_MODE_NIGHT_NO,
     name = "LightLoadedPeopleScreenPreview",
 )
-@Preview
 @Composable
 private fun LoadedPeopleScreenPreview() {
     VmTheme {
         PeopleScreen(
             uiState = LoadedPeopleUiState(People.createMocks()),
-            onBackClick = {},
-            onContentClick = { _ -> },
-            onRoomClick = {},
         )
     }
 }
@@ -214,9 +227,6 @@ private fun LoadingPeopleScreenPreview() {
     VmTheme {
         PeopleScreen(
             uiState = LoadingPeopleUiState,
-            onBackClick = {},
-            onContentClick = { _ -> },
-            onRoomClick = {},
         )
     }
 }
@@ -227,9 +237,6 @@ private fun ErrorPeopleScreenPreview() {
     VmTheme {
         PeopleScreen(
             uiState = ErrorPeopleUiState,
-            onBackClick = {},
-            onContentClick = { _ -> },
-            onRoomClick = {},
         )
     }
 }
